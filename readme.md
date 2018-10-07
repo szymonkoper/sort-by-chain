@@ -49,15 +49,15 @@ console.log(animals);
 There is also simpler function `sortBy`, where you just write keys:
 
 ```js
-sortBy(animals, 'age', 'name');
+sortBy(animals, '-age', 'pet');
 
 console.log(animals)
 /*
 [
-  { pet: 'dog', age: 3, name: 'Ruffles' },
+  { pet: 'dog', age: 5, name: 'Furball' },
   { pet: 'alpaca', age: 4 },
   { pet: 'cat', age: 4 },
-  { pet: 'dog', age: 5, name: 'Furball' },
+  { pet: 'dog', age: 3, name: 'Ruffles' },
 ]
 */
 ```
