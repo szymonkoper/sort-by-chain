@@ -1,6 +1,6 @@
 {
   "name": "sort-by-chain",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Provides a way to sorting by key or multiple keys with specific order type",
   "main": "index.js",
   "scripts": {
@@ -8,12 +8,15 @@
     "lint": "eslint ."
   },
   "keywords": [
-    "sorting", "chain", "sort", "sort by key"
+    "sorting",
+    "chain",
+    "sort",
+    "sort by key"
   ],
   "author": "Szymon Koper <sz.koper@gmail.com>",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/szymonkoper/sort-by-chain"
+    "type": "git",
+    "url": "https://github.com/szymonkoper/sort-by-chain"
   },
   "license": "MIT",
   "devDependencies": {
