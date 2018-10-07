@@ -2,26 +2,6 @@ import { deepEqual } from 'assert';
 import { sortByChain } from '..';
 import deepFreeze from 'deep-freeze';
 
-// class Person {
-//   constructor(name, surname, age) {
-//     this.name = name;
-//     this.surname = surname;
-//     this.age = age;
-//   }
-// }
-
-// const P_G_SMITH_55 = new Person('George', 'Smith', 55);
-// const P_H_JONES_33 = new Person('Harry', 'Jones', 33);
-// const P_G_SMITH_33 = new Person('George', 'Smith', 33);
-// const P_J_JONES_44 = new Person('Jacob', 'Jones', 44);
-
-// const PEOPLE = [
-//   P_G_SMITH_55,
-//   P_H_JONES_33,
-//   P_G_SMITH_33,
-//   P_J_JONES_44,
-// ];
-
 describe('sortByChain', () => {
   it('does not sort on empty chain', () => {
     deepEqual(sortByChain([], []), []);
