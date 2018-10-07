@@ -24,12 +24,12 @@ With `sortByChain` you can specify sorting chain with some customizations.
 Leftmost chain elements have bigger impact on order.
 
 ```js
-  const animals = [
-    { pet: 'dog', age: 5, name: 'Furball' },
-    { pet: 'cat', age: 4 },
-    { pet: 'dog', age: 3, name: 'Ruffles' },
-    { pet: 'alpaca', age: 4 },
-  ];
+const animals = [
+  { pet: 'dog', age: 5, name: 'Furball' },
+  { pet: 'cat', age: 4 },
+  { pet: 'dog', age: 3, name: 'Ruffles' },
+  { pet: 'alpaca', age: 4 },
+];
 
 const chain = [{ key: 'age', reverse: true }, { key: 'pet' }];
 
