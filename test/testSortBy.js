@@ -55,4 +55,23 @@ describe('sortBy', () => {
   it('does not sort with nonexistent key', () => {
     deepEqual(sortBy([{ name: 'Fluffy' }], 'no_such_key'), [{ name: 'Fluffy' }]);
   });
+
+  it('sorts using reverse order', () => {
+    const animals = [
+      { pet: 'dog', age: 5 },
+      { pet: 'cat', age: 4 },
+      { pet: 'dog', age: 3 },
+      { pet: 'alpaca', age: 4 },
+    ];
+
+    const sorted = [
+      { pet: 'dog', age: 5 },
+      { pet: 'alpaca', age: 4 },
+      { pet: 'cat', age: 4 },
+      { pet: 'dog', age: 3 },
+    ];
+
+    deepEqual(sortBy(animals, '-age', 'pet'), sorted);
+    deepEqual(animals, sorted);
+  });
 });

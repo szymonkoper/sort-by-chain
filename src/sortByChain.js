@@ -13,12 +13,16 @@ const compareFn = (chainElement) => {
   };
 };
 
+const chainElemFromKey = key => (
+  key.startsWith('-') ? { key: key.slice(1), reverse: true } : { key }
+);
+
 export function sortByChain(array, chain) {
   return chain
-    .map(e => compareFn(e))
+    .map(compareFn)
     .reduceRight((arr, cmpFn) => arr.sort(cmpFn), array);
 }
 
-export function sortBy(array, ...chain) {
-  return sortByChain(array, chain.map(key => ({ key })));
+export function sortBy(array, ...keys) {
+  return sortByChain(array, keys.map(chainElemFromKey));
 }
