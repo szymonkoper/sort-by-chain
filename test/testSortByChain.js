@@ -91,9 +91,9 @@ describe('sortByChain', () => {
   it('sorts using reverse order', () => {
     const animals = [
       { pet: 'dog', age: 5 },
-      { pet: 'alpaca', age: 4 },
-      { pet: 'dog', age: 3 },
       { pet: 'cat', age: 4 },
+      { pet: 'dog', age: 3 },
+      { pet: 'alpaca', age: 4 },
     ];
 
     const sorted = [

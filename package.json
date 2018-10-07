@@ -8,9 +8,13 @@
     "lint": "eslint ."
   },
   "keywords": [
-    "sorting"
+    "sorting", "chain", "sort", "sort by key"
   ],
   "author": "Szymon Koper <sz.koper@gmail.com>",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/szymonkoper/sort-by-chain"
+  },
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.26.3",

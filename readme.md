@@ -24,40 +24,40 @@ With `sortByChain` you can specify sorting chain with some customizations.
 Leftmost chain elements have bigger impact on order.
 
 ```js
-const people = [
-  { name: 'Adam', age: 44 },
-  { name: 'Eve', age: 22 },
-  { name: 'John', age: 11 },
-  { name: 'Adam', age: 22 },
-];
+  const animals = [
+    { pet: 'dog', age: 5, name: 'Furball' },
+    { pet: 'cat', age: 4 },
+    { pet: 'dog', age: 3, name: 'Ruffles' },
+    { pet: 'alpaca', age: 4 },
+  ];
 
-const chain = [{ key: 'age', reverse: true }, { key: 'name' }];
+const chain = [{ key: 'age', reverse: true }, { key: 'pet' }];
 
-sortByChain(people, chain); // also returns people
+sortByChain(animals, chain); // sorts animals in-place and also returns result
 
-console.log(people)
+console.log(animals);
 /*
 [
-  { name: 'Adam', age: 44 },
-  { name: 'Adam', age: 22 },
-  { name: 'Eve', age: 22 },
-  { name: 'John', age: 11 },
-]
+  { pet: 'dog', age: 5, name: 'Furball' },
+  { pet: 'alpaca', age: 4 },
+  { pet: 'cat', age: 4 },
+  { pet: 'dog', age: 3, name: 'Ruffles' },
+];
 */
 ```
 
 There is also simpler function `sortBy`, where you just write keys:
 
 ```js
-sortBy(people, 'age', 'name');
+sortBy(animals, 'age', 'name');
 
-console.log(people)
+console.log(animals)
 /*
 [
-  { name: 'John', age: 11 },
-  { name: 'Adam', age: 22 },
-  { name: 'Eve', age: 22 },
-  { name: 'Adam', age: 44 },
+  { pet: 'dog', age: 3, name: 'Ruffles' },
+  { pet: 'alpaca', age: 4 },
+  { pet: 'cat', age: 4 },
+  { pet: 'dog', age: 5, name: 'Furball' },
 ]
 */
 ```
