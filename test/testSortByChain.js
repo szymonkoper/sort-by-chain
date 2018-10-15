@@ -9,26 +9,26 @@ describe('sortByChain', () => {
   });
 
   it('sorts empty array', () => {
-    const chain = [{ key: 'age' }, { key: 'name' }];
+    const chain = [{ valueGetter: it => it.age }, { valueGetter: it => it.name }];
     deepFreeze(chain);
 
     deepEqual(sortByChain([], chain), []);
   });
 
   it('sorts one element', () => {
-    deepEqual(sortByChain([{ pet: 'dog' }], [{ key: 'pet' }]), [{ pet: 'dog' }]);
+    deepEqual(sortByChain([{ pet: 'dog' }], [{ valueGetter: 'pet' }]), [{ pet: 'dog' }]);
 
     const array = [{ pet: 'dog', sound: 'woof' }];
     const sorted = [{ pet: 'dog', sound: 'woof' }];
 
-    const chain = [{ key: 'pet' }, { key: 'age' }];
+    const chain = [{ valueGetter: it => it.pet }, { valueGetter: it => it.age }];
     deepFreeze(chain);
 
     deepEqual(sortByChain(array, chain), sorted);
     deepEqual(array, sorted);
   });
 
-  it('sorts by one ket', () => {
+  it('sorts by one key', () => {
     const animals = [
       { pet: 'dog', age: 5, name: 'Furball' },
       { pet: 'dog', age: 3, name: 'Ruffles' },
@@ -41,7 +41,7 @@ describe('sortByChain', () => {
       { pet: 'dog', age: 5, name: 'Furball' },
     ];
 
-    const chain = [{ key: 'age' }];
+    const chain = [{ valueGetter: it => it.age }];
     deepFreeze(chain);
 
     deepEqual(sortByChain(animals, chain), sorted);
@@ -61,7 +61,7 @@ describe('sortByChain', () => {
       { pet: 'dog', age: 5 },
     ];
 
-    const chain = [{ key: 'pet' }, { key: 'age' }];
+    const chain = [{ valueGetter: it => it.pet }, { valueGetter: it => it.age }];
     deepFreeze(chain);
 
     deepEqual(sortByChain(animals, chain), sorted);
@@ -83,7 +83,33 @@ describe('sortByChain', () => {
       { pet: 'dog', age: 3 },
     ];
 
-    const chain = [{ key: 'age', reverse: true }, { key: 'pet' }];
+    const chain = [{ valueGetter: it => it.age, reverse: true }, { valueGetter: it => it.pet }];
+    deepFreeze(chain);
+
+    deepEqual(sortByChain(animals, chain), sorted);
+    deepEqual(animals, sorted);
+  });
+
+  it('sorts using custom comparator', () => {
+    const animals = [
+      { pet: 'dog', age: 5 },
+      { pet: 'cat', age: 4 },
+      { pet: 'ox', age: 4 },
+      { pet: 'dog', age: 3 },
+      { pet: 'alpaca', age: 4 },
+    ];
+
+    const lengthComparator = (a, b) => b.length - a.length;
+
+    const sorted = [
+      { pet: 'ox', age: 4 },
+      { pet: 'dog', age: 5 },
+      { pet: 'cat', age: 4 },
+      { pet: 'dog', age: 3 },
+      { pet: 'alpaca', age: 4 },
+    ];
+
+    const chain = [{ valueGetter: it => it.pet, comparator: lengthComparator }];
     deepFreeze(chain);
 
     deepEqual(sortByChain(animals, chain), sorted);

@@ -1,6 +1,6 @@
 # sort-by-chain
 
-> Sort array by key or multiple keys with specific order type
+> Sort array by one or chain of properties with custom comparators
 
 Experimental project. There is possibility of critical bugs and breaking changes in future.
 
@@ -14,44 +14,18 @@ $ npm install --save sort-by-chain
 
 ## Usage
 
+### Simple sorting
+
 Import package:
 
 ```js
-import { sortBy, sortByChain } from 'sort-by-chain';
+import { sortBy } from 'sort-by-chain';
 ```
 
-With `sortByChain` you can specify sorting chain with some customizations.
-Leftmost chain elements have bigger impact on order.
-
-```js
-const animals = [
-  { pet: 'dog', age: 5, name: 'Furball' },
-  { pet: 'cat', age: 4 },
-  { pet: 'dog', age: 3, name: 'Ruffles' },
-  { pet: 'alpaca', age: 4 },
-];
-
-const chain = [{ key: 'age', reverse: true }, { key: 'pet' }];
-
-sortByChain(animals, chain); // sorts animals in-place and also returns result
-
-console.log(animals);
-/*
-[
-  { pet: 'dog', age: 5, name: 'Furball' },
-  { pet: 'alpaca', age: 4 },
-  { pet: 'cat', age: 4 },
-  { pet: 'dog', age: 3, name: 'Ruffles' },
-];
-*/
-```
-
-There is also simpler function `sortBy`, where you just write keys:
+With `sortBy` you just write keys as strings. Custom comparators are not supported this way.
 
 ```js
 sortBy(animals, '-age', 'pet');
-
-console.log(animals)
 /*
 [
   { pet: 'dog', age: 5, name: 'Furball' },
@@ -59,6 +33,62 @@ console.log(animals)
   { pet: 'cat', age: 4 },
   { pet: 'dog', age: 3, name: 'Ruffles' },
 ]
+*/
+```
+
+
+### More customized sorting
+
+Import package:
+
+```js
+import { sortByChain } from 'sort-by-chain';
+```
+
+With `sortByChain` you can specify sorting chain with some customizations.
+
+```js
+const animals = [
+  { pet: 'dog', age: 5, name: 'Furball' },
+  { pet: 'cat', age: 4 },
+  { pet: 'ox', age: 4 },
+  { pet: 'dog', age: 3, name: 'Ruffles' },
+  { pet: 'alpaca', age: 4 },
+];
+
+const chain = [
+  { valueGetter: it => it.age, reverse: true },
+  { valueGetter: it => it.pet },
+];
+
+sortByChain(animals, chain);
+/*
+[
+  { pet: 'dog', age: 5, name: 'Furball' },
+  { pet: 'alpaca', age: 4 },
+  { pet: 'cat', age: 4 },
+  { pet: 'ox', age: 4 },
+  { pet: 'dog', age: 3, name: 'Ruffles' },
+];
+*/
+```
+
+You can also specify custom comparators.
+
+```js
+const stringLengthComparator = (a, b) => b.length - a.length;
+
+const chain = [{ valueGetter: it => it.pet, comparator: stringLengthComparator }];
+
+sortByChain(animals, chain)
+/*
+[
+  { pet: 'ox', age: 4 },
+  { pet: 'dog', age: 5, name: 'Furball' },
+  { pet: 'cat', age: 4 },
+  { pet: 'dog', age: 3, name: 'Ruffles' },
+  { pet: 'alpaca', age: 4 },
+];
 */
 ```
 

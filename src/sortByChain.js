@@ -9,25 +9,21 @@ const simpleComparator = (a, b) => {
 
 const alwaysEqualComparator = () => 0;
 
-const keyValueComparator = (chainElement) => {
-  const { key, reverse } = chainElement;
+const valueComparator = (chainElement) => {
+  const { valueGetter, reverse, comparator } = chainElement;
 
   return reverse
-    ? (a, b) => simpleComparator(a[key], b[key])
-    : (a, b) => simpleComparator(b[key], a[key]);
+    ? (a, b) => (comparator || simpleComparator)(valueGetter(a), valueGetter(b))
+    : (a, b) => (comparator || simpleComparator)(valueGetter(b), valueGetter(a));
 };
 
-const objComparator = (chain) => {
-  const keyValueComparators = chain.map(keyValueComparator);
-
-  return (a, b) => {
-    const firstNonEqualKeyComparator = keyValueComparators.find(cmp => cmp(a, b));
-    return (firstNonEqualKeyComparator || alwaysEqualComparator)(a, b);
-  };
+const objComparator = chain => (a, b) => {
+  const firstNonEqualKeyComparator = chain.map(valueComparator).find(cmp => cmp(a, b));
+  return (firstNonEqualKeyComparator || alwaysEqualComparator)(a, b);
 };
 
 const chainElementFromKey = key => (
-  key.startsWith('-') ? { key: key.slice(1), reverse: true } : { key }
+  key.startsWith('-') ? { valueGetter: it => it[key.slice(1)], reverse: true } : { valueGetter: it => it[key] }
 );
 
 export function sortByChain(array, chain) {
