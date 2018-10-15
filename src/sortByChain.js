@@ -4,27 +4,29 @@ const simpleComparator = (a, b) => {
   } if (a > b) {
     return -1;
   }
-
   return 0;
 };
 
+const alwaysEqualComparator = () => 0;
+
 const keyValueComparator = (chainElement) => {
   const { key, reverse } = chainElement;
-  const orderValue = reverse ? 1 : -1;
 
-  return (a, b) => simpleComparator(a[key], b[key]) * orderValue;
+  return reverse
+    ? (a, b) => simpleComparator(a[key], b[key])
+    : (a, b) => simpleComparator(b[key], a[key]);
 };
 
 const objComparator = (chain) => {
   const keyValueComparators = chain.map(keyValueComparator);
 
   return (a, b) => {
-    const firstDiffCmp = keyValueComparators.find(cmp => cmp(a, b));
-    return firstDiffCmp ? firstDiffCmp(a, b) : 0;
+    const firstNonEqualKeyComparator = keyValueComparators.find(cmp => cmp(a, b));
+    return (firstNonEqualKeyComparator || alwaysEqualComparator)(a, b);
   };
 };
 
-const chainElemFromKey = key => (
+const chainElementFromKey = key => (
   key.startsWith('-') ? { key: key.slice(1), reverse: true } : { key }
 );
 
@@ -33,5 +35,5 @@ export function sortByChain(array, chain) {
 }
 
 export function sortBy(array, ...keys) {
-  return sortByChain(array, keys.map(chainElemFromKey));
+  return sortByChain(array, keys.map(chainElementFromKey));
 }
