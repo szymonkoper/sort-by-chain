@@ -1,5 +1,11 @@
 # sort-by-chain
 
+
+[![build state](https://img.shields.io/travis/szymonkoper/sort-by-chain/master.svg)](https://travis-ci.com/szymonkoper/sort-by-chain)
+[![install size](https://packagephobia.now.sh/badge?p=sort-by-chain)](https://packagephobia.now.sh/result?p=sort-by-chain)
+[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
+
+
 > Sort array by one or chain of properties with custom comparators
 
 Experimental project. There is possibility of critical bugs and breaking changes in future.
@@ -9,6 +15,12 @@ Experimental project. There is possibility of critical bugs and breaking changes
 
 ```
 $ npm install --save sort-by-chain
+```
+
+or 
+
+```
+$ yarn add sort-by-chain
 ```
 
 
