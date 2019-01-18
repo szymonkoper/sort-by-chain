@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+- "9"
+
+notifications:
+  email:
+    recipients:
+    - sz.koper@gmail.com 
+    on_success: always
+    on_failure: always
+
