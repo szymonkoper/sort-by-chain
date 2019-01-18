@@ -1,6 +1,6 @@
 {
   "name": "sort-by-chain",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Provides a way to sorting by key or multiple keys with specific order type",
   "main": "index.js",
   "scripts": {
