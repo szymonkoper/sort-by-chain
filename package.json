@@ -2,10 +2,13 @@
   "name": "sort-by-chain",
   "version": "0.0.6",
   "description": "Provides a way to sorting by key or multiple keys with specific order type",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
-    "test": "mocha --require babel-core/register",
-    "lint": "eslint ."
+    "build": "tsc",
+    "test": "jest --config jestconfig.json",
+    "prepublishOnly": "yarn test",
+    "preversion": "yarn test"
   },
   "keywords": [
     "sorting",
@@ -20,13 +23,12 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-eslint": "^10.0.1",
-    "babel-preset-es2015": "^6.24.1",
-    "deep-freeze": "0.0.1",
-    "eslint": "^5.6.1",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "mocha": "^5.2.0"
-  }
+    "@types/jest": "^24.0.13",
+    "jest": "^24.8.0",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.4.5"
+  },
+  "files": [
+    "lib/**/*"
+  ]
 }
